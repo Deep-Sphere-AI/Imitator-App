@@ -7,13 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2EDB769B2E3241D800F286EF /* SweetLlama in Frameworks */ = {isa = PBXBuildFile; productRef = 2EDB769A2E3241D800F286EF /* SweetLlama */; };
-		2EDB76A62E32E26B00F286EF /* llama.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EDB76A52E32E26B00F286EF /* llama.xcframework */; };
+		2EDB76B32E33040700F286EF /* llama.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EDB76B12E3303FE00F286EF /* llama.xcframework */; };
+		2EDB76B42E33040700F286EF /* llama.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EDB76B12E3303FE00F286EF /* llama.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2EDB76AC2E32EBEE00F286EF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2EDB76B42E33040700F286EF /* llama.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2E8CDBEC2E32152E00817EE0 /* Imitator-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Imitator-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2EDB76A52E32E26B00F286EF /* llama.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = llama.xcframework; sourceTree = "<group>"; };
+		2EDB76B12E3303FE00F286EF /* llama.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = llama.xcframework; path = "/Users/giorgio6846/llama.cpp-b5985/build-apple/llama.xcframework"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -29,8 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EDB769B2E3241D800F286EF /* SweetLlama in Frameworks */,
-				2EDB76A62E32E26B00F286EF /* llama.xcframework in Frameworks */,
+				2EDB76B32E33040700F286EF /* llama.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,7 +53,7 @@
 		2E70CA202E322ADC00EA75A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2EDB76A52E32E26B00F286EF /* llama.xcframework */,
+				2EDB76B12E3303FE00F286EF /* llama.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -72,6 +85,7 @@
 				2E8CDBE82E32152E00817EE0 /* Sources */,
 				2E8CDBE92E32152E00817EE0 /* Frameworks */,
 				2E8CDBEA2E32152E00817EE0 /* Resources */,
+				2EDB76AC2E32EBEE00F286EF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -82,7 +96,6 @@
 			);
 			name = "Imitator-App";
 			packageProductDependencies = (
-				2EDB769A2E3241D800F286EF /* SweetLlama */,
 			);
 			productName = "Imitator-App";
 			productReference = 2E8CDBEC2E32152E00817EE0 /* Imitator-App.app */;
@@ -113,7 +126,6 @@
 			mainGroup = 2E8CDBE32E32152E00817EE0;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2E61B7492E3241990012B8A6 /* XCLocalSwiftPackageReference "SweetLlama" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2E8CDBED2E32152E00817EE0 /* Products */;
@@ -272,6 +284,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Imitator-App/Imitator-App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -311,6 +324,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Imitator-App/Imitator-App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -367,21 +381,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		2E61B7492E3241990012B8A6 /* XCLocalSwiftPackageReference "SweetLlama" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = SweetLlama;
-		};
-/* End XCLocalSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		2EDB769A2E3241D800F286EF /* SweetLlama */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2E61B7492E3241990012B8A6 /* XCLocalSwiftPackageReference "SweetLlama" */;
-			productName = SweetLlama;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2E8CDBE42E32152E00817EE0 /* Project object */;
 }
