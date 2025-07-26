@@ -1,4 +1,26 @@
-.vscode
-SweetLlama
-llmmodels
-llama.xcframework/
+# Editor settings
+.vscode/
+
+# CocoaPods
+Pods/
+
+# Your model files folder (at project root)
+modelsFiles/
+
+# Xcode build artifacts
+DerivedData/
+build/
+*.xcworkspace
+*.xcodeproj/project.xcworkspace/
+xcuserdata/
+*.xcuserstate
+
+# Swift Package Manager
+.build/
+Package.resolved
+
+# Carthage
+Carthage/Build/
+
+# Misc
+.DS_Store
