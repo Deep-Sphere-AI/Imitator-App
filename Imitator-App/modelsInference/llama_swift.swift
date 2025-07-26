@@ -14,12 +14,21 @@ class LlamaState: ObservableObject {
     
     private var llamaContext: LlamaContext?
     private var defaultModelUrl: URL? {
-        Bundle.main.url(
-            forResource: "gemma-3n-E2B-it-Q4_K_M",
-            withExtension: "gguf",
-        )
+        // 1. Locate the Documents directory
+        let docsURL = FileManager
+            .default
+            .urls(for: .documentDirectory, in: .userDomainMask)
+            .first!
+        
+        // 2. Append your model’s filename
+        let modelURL = docsURL.appendingPathComponent("gemma-3n-E2B-it-Q4_K_M.gguf")
+        
+        // 3. Return it if the file actually exists
+        return FileManager.default.fileExists(atPath: modelURL.path)
+            ? modelURL
+            : nil
     }
-    
+
     init() {
         loadDefaultModel()
     }
