@@ -8,79 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.horizontalSizeClass) var hSizeClass
-    
-    //@StateObject private var llamaState = LlamaState()
-    //@State private var multiLineText = ""
+    @Environment(\.horizontalSizeClass) private var hSize
     
     var body: some View {
         Group {
-            if hSizeClass == .regular {
-                //iPad Mode
-                HStack {
-                    VStack {
-                        ChatView()
-                            .frame(maxWidth: .infinity)
-                    }
-                    CameraSignView()
-                        .frame(maxWidth: .infinity)
-                }
-            } else {
-                //iPhone Mode
-                VStack {
-                    ChatView()
-                        .frame(maxHeight: .infinity)
-                    CameraSignView()
-                        .frame(maxHeight: .infinity)
-
+                VStack(spacing: 0) {
+                    CameraView()
+                    //ChatView()
                 }
             }
-        }
         .edgesIgnoringSafeArea(.all)
     }
 }
-
-struct ChatView: View {
-    var body: some View {
-        Color.blue
-            .overlay(Text("Chat").foregroundColor(.white))
-    }
-}
-
-struct CameraSignView: View {
-    var body: some View {
-        Color.green
-            .overlay(Text("Camera").foregroundColor(.white))
-    }
-}
-
-//        VStack {
-//            Text(llamaState.messageLog)
-//                .padding()
-//                .task {
-//                    sendText()
-//                }
-//        }
-    
-    
-//    func sendText() {
-//        Task {
-//            await llamaState.complete(text: "What is the meaning of life?")
-//            multiLineText = ""
-//        }
-//    }
-
 
 struct ChatWithKeypointsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ContentView()
-                .previewDevice("iPad Pro (11-inch)")
-                .previewDisplayName("iPad")
-
+                .previewDevice("iPad Pro (12.9-inch) (6th generation)")
             ContentView()
-                .previewDevice("iPhone 14")
-                .previewDisplayName("iPhone")
+               .previewDevice("iPhone 14 Pro")
         }
     }
 }

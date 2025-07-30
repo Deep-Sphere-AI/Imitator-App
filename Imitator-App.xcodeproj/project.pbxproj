@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2ECE94C52E38BA2800D5C580 /* SwiftCameraKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2ECE94C42E38BA2800D5C580 /* SwiftCameraKit */; };
 		2EDB76B32E33040700F286EF /* llama.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EDB76B12E3303FE00F286EF /* llama.xcframework */; };
 		2EDB76B42E33040700F286EF /* llama.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EDB76B12E3303FE00F286EF /* llama.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2EFD23312E33310A0015AD9B /* Pods_Imitator_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64565E9E9DDF67D57C79F823 /* Pods_Imitator_App.framework */; };
@@ -65,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ECE94C52E38BA2800D5C580 /* SwiftCameraKit in Frameworks */,
 				2EDB76B32E33040700F286EF /* llama.xcframework in Frameworks */,
 				2EFD23312E33310A0015AD9B /* Pods_Imitator_App.framework in Frameworks */,
 			);
@@ -158,6 +160,9 @@
 			);
 			mainGroup = 2E8CDBE32E32152E00817EE0;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2ECE94C32E38BA2800D5C580 /* XCRemoteSwiftPackageReference "SwiftCameraKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2E8CDBED2E32152E00817EE0 /* Products */;
 			projectDirPath = "";
@@ -273,6 +278,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -330,6 +336,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -350,12 +357,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Imitator-App/Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is required to communicate with the model ";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera for the model inference";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The library used for the camera capture adds the use of the microphone";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -393,12 +400,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Imitator-App/Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is required to communicate with the model ";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera for the model inference";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The library used for the camera capture adds the use of the microphone";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -443,6 +450,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2ECE94C32E38BA2800D5C580 /* XCRemoteSwiftPackageReference "SwiftCameraKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nicolaischneider/SwiftCameraKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2ECE94C42E38BA2800D5C580 /* SwiftCameraKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2ECE94C32E38BA2800D5C580 /* XCRemoteSwiftPackageReference "SwiftCameraKit" */;
+			productName = SwiftCameraKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2E8CDBE42E32152E00817EE0 /* Project object */;
 }
