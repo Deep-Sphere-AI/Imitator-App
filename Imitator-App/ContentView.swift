@@ -14,7 +14,7 @@ struct ContentView: View {
         Group {
                 VStack(spacing: 0) {
                     CameraView()
-                    //ChatView()
+                    ChatView()
                 }
             }
         .edgesIgnoringSafeArea(.all)
