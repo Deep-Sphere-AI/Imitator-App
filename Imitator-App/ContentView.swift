@@ -6,24 +6,31 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
     @StateObject private var llamaState = LlamaState()
     @State private var selection: Tab = .sign
+    @State private var keyboardHeight: CGFloat = 0
+    
+    private var keyboardPublisher: AnyPublisher<CGFloat, Never> {
+        Publishers.Merge(
+            NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+                .compactMap { $0.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect }
+                .map { $0.height },
+            NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+                .map { _ in CGFloat(0) }
+        )
+        .eraseToAnyPublisher()
+    }
+
     
     enum Tab { case sign, chat }
     
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(red: 42/255, green: 54/255, blue: 70/255),
-                    Color(red: 80/255, green: 90/255, blue: 110/255)  // customize your end color
-                ]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
+            Color("AccentColor")
+                .ignoresSafeArea()
             TabView(selection: $selection) {
                 CameraView()
                     .tabItem { Label("Sign", systemImage: "hand.raised.fill") }
@@ -33,16 +40,9 @@ struct ContentView: View {
                     .tag(Tab.chat)
             }
         }
-    }
-}
-
-struct ChatWithKeypointsView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ContentView()
-                .previewDevice("iPad Pro (12.9-inch) (6th generation)")
-            ContentView()
-               .previewDevice("iPhone 14 Pro")
+        .onReceive(keyboardPublisher) { height in
+            self.keyboardHeight = height
         }
+
     }
 }

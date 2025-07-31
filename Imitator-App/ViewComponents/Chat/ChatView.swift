@@ -10,6 +10,7 @@ import SwiftUI
 struct ChatView: View {
     @ObservedObject var llama: LlamaState
     @State private var inputText: String = ""
+    @FocusState private var isInputActive: Bool
     
     var body: some View {
       VStack {
@@ -30,36 +31,31 @@ struct ChatView: View {
           }
         }
 
-        HStack {
-          TextField("Type a message…", text: $inputText)
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .onSubmit {
-              send()
-            }
+          HStack {
+              TextField("Type a message…", text: $inputText)
+                  .focused($isInputActive)        // ②
+                  .textFieldStyle(RoundedBorderTextFieldStyle())
+                  .onSubmit { send() }            // ③
 
-          Button {
-            send()
-          } label: {
-            Image(systemName: "paperplane.fill")
-              .rotationEffect(.degrees(45))
+              Button(action: send) {
+                  Image(systemName: "paperplane.fill")
+                      .rotationEffect(.degrees(45))
+              }
+              .disabled(inputText.trimmingCharacters(in: .whitespaces).isEmpty)
           }
-          .disabled(inputText.trimmingCharacters(in: .whitespaces).isEmpty)
-        }
-        .padding()
+          .padding()
+          .background(Color(.secondarySystemBackground))
       }
     }
 
     private func send() {
-      print(inputText)
-      let text = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
-      guard !text.isEmpty else { return }
-      Task {
-        print(text)
-        await llama.complete(text: text)
+        let msg = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !msg.isEmpty else { return }
+        Task { await llama.complete(text: msg) }
         inputText = ""
+        isInputActive = false          // ④ this collapses the keyboard
       }
     }
-  }
 
 struct ChatBubble: View {
   let message: ChatMessage

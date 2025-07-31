@@ -49,6 +49,7 @@ struct CameraView: View {
       }
       .padding(.bottom, 30)
     }
+    .background(Color.clear)
     .padding()
   }
 }

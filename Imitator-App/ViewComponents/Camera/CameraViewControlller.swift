@@ -113,6 +113,7 @@ struct CameraViewControllerRepresentable: UIViewControllerRepresentable {
                                 context: Context) {
         // Now that SwiftUI has laid out the view,
         // safely bind the controller to your @State
+        uiViewController.view.backgroundColor = .clear
         DispatchQueue.main.async {
             self.cameraVC = uiViewController
         }
