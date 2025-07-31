@@ -19,7 +19,6 @@ final class CameraViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
         setupCamera()
     }
     
@@ -28,7 +27,7 @@ final class CameraViewController: UIViewController {
             videoSettings: SwiftCameraKitConfig.VideoSettings(
                 videoSessionPreset: .high,
                 maxVideoRecordingDuration: 60,
-                videoGravity: .resizeAspectFill
+                videoGravity: .resizeAspect
             )
         )
         cameraKit = SwiftCameraKit(view: view, configs: cameraConfig)

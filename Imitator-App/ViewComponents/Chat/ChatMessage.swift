@@ -6,14 +6,13 @@
 //
 
 import Foundation
-import Combine
+
+enum ChatRole: String, Codable {
+  case system, user, assistant
+}
 
 struct ChatMessage: Identifiable, Codable {
-    enum Role: String, Codable {
-        case system, user, assistant
-    }
-
-    let id = UUID()
-    let role: Role
-    let content: String
+  let id = UUID()
+  let role: ChatRole
+  var content: String
 }

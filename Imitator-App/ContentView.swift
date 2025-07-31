@@ -8,16 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.horizontalSizeClass) private var hSize
+    @StateObject private var llamaState = LlamaState()
+    @State private var selection: Tab = .sign
+    
+    enum Tab { case sign, chat }
     
     var body: some View {
-        Group {
-                VStack(spacing: 0) {
-                    CameraView()
-                    ChatView()
-                }
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(red: 42/255, green: 54/255, blue: 70/255),
+                    Color(red: 80/255, green: 90/255, blue: 110/255)  // customize your end color
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
+            TabView(selection: $selection) {
+                CameraView()
+                    .tabItem { Label("Sign", systemImage: "hand.raised.fill") }
+                    .tag(Tab.sign)
+                ChatView(llama: llamaState)
+                    .tabItem { Label("Chat", systemImage: "message.fill") }
+                    .tag(Tab.chat)
             }
-        .edgesIgnoringSafeArea(.all)
+        }
     }
 }
 

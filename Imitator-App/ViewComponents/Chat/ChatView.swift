@@ -8,59 +8,80 @@
 import SwiftUI
 
 struct ChatView: View {
-    @StateObject private var llama = LlamaState()
-    @State private var userInput: String = ""
-    @State private var isSending = false
-
+    @ObservedObject var llama: LlamaState
+    @State private var inputText: String = ""
+    
     var body: some View {
-        VStack {
-            // 1. Scrollable log of the conversation
-            ScrollViewReader { scroll in
-                ScrollView {
-                    Text(llama.messageLog)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                        .id("LOG_BOTTOM")
-                }
-                .onChange(of: llama.messageLog) { _ in
-                    // scroll to bottom whenever new text arrives
-                    withAnimation {
-                        scroll.scrollTo("LOG_BOTTOM", anchor: .bottom)
-                    }
-                }
+      VStack {
+        ScrollViewReader { scroll in
+          ScrollView {
+            VStack(spacing: 8) {
+              ForEach(llama.messages) { msg in
+                ChatBubble(message: msg)
+              }
             }
-            .background(Color(white: 0.95))
-            .cornerRadius(8)
-            .padding()
-
-            // 2. Input field & send button
-            HStack {
-                TextField("Type a message…", text: $userInput)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .disabled(isSending)
-                Button {
-                    sendMessage()
-                } label: {
-                    Image(systemName: "paperplane.fill")
-                        .rotationEffect(.degrees(45))
-                        .padding(8)
-                }
-                .disabled(isSending || userInput.trimmingCharacters(in: .whitespaces).isEmpty)
+            .padding(.vertical, 12)
+            .id("LOG_BOTTOM")
+          }
+          .onChange(of: llama.messages.count) { _ in
+            withAnimation {
+              scroll.scrollTo("LOG_BOTTOM", anchor: .bottom)
             }
-            .padding([.horizontal, .bottom])
+          }
         }
-        .navigationTitle("Chat with LLM")
+
+        HStack {
+          TextField("Type a message…", text: $inputText)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .onSubmit {
+              send()
+            }
+
+          Button {
+            send()
+          } label: {
+            Image(systemName: "paperplane.fill")
+              .rotationEffect(.degrees(45))
+          }
+          .disabled(inputText.trimmingCharacters(in: .whitespaces).isEmpty)
+        }
+        .padding()
+      }
     }
 
-
-    private func sendMessage() {
-        guard !userInput.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        isSending = true
-        let text = userInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        userInput = ""
-        Task {
-            await llama.complete(text: text)
-            isSending = false
-        }
+    private func send() {
+      print(inputText)
+      let text = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+      guard !text.isEmpty else { return }
+      Task {
+        print(text)
+        await llama.complete(text: text)
+        inputText = ""
+      }
     }
+  }
+
+struct ChatBubble: View {
+  let message: ChatMessage
+
+  var body: some View {
+    HStack {
+      if message.role == .assistant { Spacer() }
+      Text(message.content)
+        .padding(12)
+        .background(
+          message.role == .user
+            ? Color.accentColor
+            : Color(.secondarySystemBackground)
+        )
+        .foregroundColor(
+          message.role == .user ? .white : .primary
+        )
+        .cornerRadius(16)
+        .frame(maxWidth: .infinity,
+               alignment: message.role == .user ? .trailing : .leading)
+      if message.role == .user { Spacer() }
+    }
+    .padding(.horizontal, 8)
+  }
 }
